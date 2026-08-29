@@ -1,0 +1,72 @@
+{
+  "target": "Runloop",
+  "headline": "We used Runloop to red-team Runloop.",
+  "summary": "A sanitized replay of a real black-box investigation. Sensitive reproduction details are withheld for responsible disclosure.",
+  "timeline": [
+    {
+      "id": "recon",
+      "agent": "surface_mapper",
+      "label": "Recon",
+      "status": "observed",
+      "title": "Map the product from the outside",
+      "detail": "The agent mapped self-service workflows, public documentation, agent gateways, sandbox boundaries, and observable control-plane behavior.",
+      "metric": "12 surfaces"
+    },
+    {
+      "id": "model",
+      "agent": "product_cartographer",
+      "label": "Model",
+      "status": "inferred",
+      "title": "Find where authority changes",
+      "detail": "It separated what happened inside a disposable agent sandbox from actions performed by services outside that sandbox.",
+      "metric": "7 boundaries"
+    },
+    {
+      "id": "hypothesize",
+      "agent": "boundary_hunter",
+      "label": "Hypothesize",
+      "status": "inferred",
+      "title": "Ask what the product trusts",
+      "detail": "Specialist workers proposed competing explanations for an attacker-controlled destination being used by a server-side gateway.",
+      "metric": "3 hypotheses"
+    },
+    {
+      "id": "probe",
+      "agent": "probe_operator",
+      "label": "Probe",
+      "status": "observed",
+      "title": "Run the smallest discriminating test",
+      "detail": "An owned callback captured only source, method, and header names. A negative control distinguished gateway behavior from ordinary sandbox egress.",
+      "metric": "2 controls"
+    },
+    {
+      "id": "prove",
+      "agent": "chain_builder",
+      "label": "Prove",
+      "status": "confirmed",
+      "title": "Show the runtime boundary",
+      "detail": "The evidence confirmed a server-side request primitive outside the disposable sandbox. No cloud credential, cross-tenant data, or destructive impact was accessed.",
+      "metric": "1 proven path"
+    },
+    {
+      "id": "repair",
+      "agent": "remediation_engineer",
+      "label": "Repair",
+      "status": "proposed",
+      "title": "Cut the weakest edge",
+      "detail": "SPYDR proposed destination validation, private-address blocking, redirect revalidation, and a regression matrix for the gateway boundary.",
+      "metric": "4 controls"
+    }
+  ],
+  "path": [
+    "attacker-controlled configuration",
+    "server-side gateway",
+    "unexpected network destination",
+    "crossed trust boundary"
+  ],
+  "proof": {
+    "confirmed": "The request was made by a Runloop-side service outside the disposable agent sandbox.",
+    "limited": "No cloud credential, private customer data, cross-tenant authority, or destructive action was obtained.",
+    "next": "Block unsafe destinations after DNS resolution and revalidate every redirect hop."
+  }
+}
