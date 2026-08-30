@@ -6,7 +6,7 @@ SPYDR
 
 ## Team members
 
-- Rajiv Singh, rajivsingh430@gmail.com
+- Rajeev Singh, rajivsingh430@gmail.com
 
 ## Project description
 

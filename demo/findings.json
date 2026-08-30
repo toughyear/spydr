@@ -1,40 +1,45 @@
 [
   {
     "severity": "CRITICAL",
-    "short": "Cross-user credential use",
-    "title": "A Member could use another user's private gateway.",
+    "short": "Cross-user secret use",
+    "title": "Cross-user secret use",
+    "impact": "A normal Member can make Runloop use another user's private API key or secret when the gateway ID is known.",
     "path": ["Member", "another user's gateway ID", "agent launch", "other user's credential"],
     "proof": "The Member could not list or open the private gateway. The Member supplied its ID during an agent launch. Runloop then used the gateway owner's test credential.",
     "fix": "Check the owner and organization each time Runloop uses a gateway ID."
   },
   {
     "severity": "HIGH",
-    "short": "Agent Gateway SSRF",
-    "title": "A sandboxed agent could make a server-side request.",
+    "short": "Sandbox SSRF",
+    "title": "SSRF from the sandbox",
+    "impact": "A sandbox user can make a Runloop gateway send requests to services on the local network outside the sandbox.",
     "path": ["agent request", "Runloop gateway", "local network address", "live response"],
     "proof": "A test callback showed that the request came from a Runloop gateway service, not the Devbox. A local network target returned a live HTTP response.",
     "fix": "Block private network addresses before each request and after each redirect."
   },
   {
     "severity": "HIGH",
-    "short": "OAuth preflight SSRF",
-    "title": "OAuth setup followed a redirect to a local address.",
+    "short": "OAuth setup SSRF",
+    "title": "OAuth SSRF before agent launch",
+    "impact": "A user can make Reflex send an OAuth registration request to a service on the local network before any agent runs.",
     "path": ["MCP address", "OAuth setup", "redirect", "local address"],
     "proof": "Before an MCP setup or agent existed, the Reflex server fetched a selected OAuth file. A test redirect sent its registration request to a local address.",
     "fix": "Allow only public HTTPS addresses during OAuth setup. Check the address again after each redirect."
   },
   {
     "severity": "HIGH",
-    "short": "Response-bearing MCP SSRF",
-    "title": "The MCP test returned part of a server response.",
+    "short": "SSRF response leak",
+    "title": "SSRF with response data",
+    "impact": "A user can make Runloop fetch a selected address and return part of the response. Reachable service data can appear in the error.",
     "path": ["MCP address", "Runloop server", "server error", "response shown to user"],
     "proof": "A test server returned a unique marker in an HTTP 500 response. The same marker appeared in the MCP connection error shown to the user.",
     "fix": "Allow only public HTTPS addresses. Check each redirect. Do not show server response bodies to the user."
   },
   {
     "severity": "HIGH",
-    "short": "Workstation boundary bypass",
-    "title": "The file tool blocked a file. The command tool read it.",
+    "short": "CLI arbitrary file read",
+    "title": "CLI arbitrary file read",
+    "impact": "An agent connected to a Mac can read files outside the selected folder with the permissions of the connected Mac user.",
     "path": ["connected agent", "command tool", "Mac shell", "file outside selected folder"],
     "proof": "The file tool blocked a test file outside the selected folder. The command tool read the same file from the connected Mac.",
     "fix": "Apply the selected folder limit to commands and subprocesses, not only the file tool."
