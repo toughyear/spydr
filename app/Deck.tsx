@@ -6,6 +6,39 @@ import findings from "../demo/findings.json";
 
 type Finding = (typeof findings)[number];
 
+const ASCII_SPIDER = String.raw`           ;               ,
+         ,;                 '.
+        ;:                   :;
+       ::                     ::
+       ::                     ::
+       ':                     :
+        :.                    :
+     ;' ::                   ::  '
+    .'  ';                   ;'  '.
+   ::    :;                 ;:    ::
+   ;      :;.             ,;:     ::
+   :;      :;:           ,;"      ::
+   ::.      ':;  ..,.;  ;:'     ,.;:
+    "'"...   '::,::::: ;:   .;.""'
+        '"""....;:::::;,;."""
+    .:::.....'"':::::::'",...;::::;.
+   ;:' '""'"";.,;:::::;.'""""""  ':;
+  ::'         ;::;:::;::..         :;
+ ::         ,;:::::::::::;:..       ::
+ ;'     ,;;:;:::::::::::::::";..    ':.
+::     ;:"  ::::::"""'::::::  ":     ::
+ :.    ::   ::::::;  :::::::   :     ;
+  ;    ::   :::::::  :::::::   :    ;
+   '   ::   ::::::....:::::'  ,:   '
+    '  ::    :::::::::::::"   ::
+       ::     ':::::::::"'    ::
+       ':       """""""'      ::
+        ::                   ;:
+        ':;                 ;:"
+          ';              ,;'
+            "'           '"
+              '`;
+
 function Frame({
   chapter,
   title,
@@ -16,7 +49,7 @@ function Frame({
   chapter: string;
   title: ReactNode;
   children?: ReactNode;
-      tone?: "dark" | "light" | "acid";
+  tone?: "dark" | "light" | "acid";
   className?: string;
 }) {
   return (
@@ -58,6 +91,7 @@ export function Deck() {
 
   const slides: ReactNode[] = [
     <Frame key="cover" chapter="SPYDR / CODEX COMMUNITY HACKATHON" title={<>SPYDR is your<br />autonomous red team.</>} className="coverSlide">
+      <pre className="coverSpider" aria-hidden="true">{ASCII_SPIDER}</pre>
       <p className="heroCopy">Give SPYDR a domain. SPYDR finds and proves security bugs in the live product.</p>
       <div className="coverProof"><span>LIVE PROOF</span><strong>SPYDR found 5 active vulnerabilities in Runloop.</strong><em>1 CRITICAL · 4 HIGH</em></div>
     </Frame>,
@@ -152,19 +186,36 @@ export function Deck() {
   ];
 
   const last = slides.length - 1;
-  const next = useCallback(() => setIndex((value) => Math.min(last, value + 1)), [last]);
-  const previous = useCallback(() => setIndex((value) => Math.max(0, value - 1)), []);
+  const navigate = useCallback((value: number, replace = false) => {
+    const nextIndex = Math.max(0, Math.min(last, value));
+    setIndex(nextIndex);
+    const url = new URL(window.location.href);
+    url.searchParams.set("slide", String(nextIndex + 1));
+    window.history[replace ? "replaceState" : "pushState"]({}, "", url);
+  }, [last]);
+  const next = useCallback(() => navigate(index + 1), [index, navigate]);
+  const previous = useCallback(() => navigate(index - 1), [index, navigate]);
+
+  useEffect(() => {
+    function syncFromUrl() {
+      const requested = Number(new URLSearchParams(window.location.search).get("slide"));
+      setIndex(Number.isFinite(requested) && requested > 0 ? Math.min(last, requested - 1) : 0);
+    }
+    syncFromUrl();
+    window.addEventListener("popstate", syncFromUrl);
+    return () => window.removeEventListener("popstate", syncFromUrl);
+  }, [last]);
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
       if (["ArrowRight", "ArrowDown", " ", "Enter"].includes(event.key)) { event.preventDefault(); next(); }
       if (["ArrowLeft", "ArrowUp", "Backspace"].includes(event.key)) { event.preventDefault(); previous(); }
-      if (event.key === "Home") setIndex(0);
-      if (event.key === "End") setIndex(last);
+      if (event.key === "Home") navigate(0);
+      if (event.key === "End") navigate(last);
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [last, next, previous]);
+  }, [last, navigate, next, previous]);
 
   function tapThrough(event: React.PointerEvent<HTMLElement>) {
     if ((event.target as HTMLElement).closest("button,a")) return;
@@ -174,7 +225,9 @@ export function Deck() {
   return (
     <main className="deck" onPointerUp={tapThrough}>
       <header className="deckHeader">
-        <button className="deckBrand" type="button" onClick={() => setIndex(0)}><i>✳</i> SPYDR</button>
+        <button className="deckBrand" type="button" onClick={() => navigate(0)} aria-label="Go to the SPYDR cover">
+          <span className="asciiLogo" aria-hidden="true"><pre>{ASCII_SPIDER}</pre></span><b>SPYDR</b>
+        </button>
         <span>CODEX × RUNLOOP</span>
       </header>
 

@@ -52,6 +52,10 @@ test("keeps recon and finding evidence in structured data", async () => {
   assert.deepEqual(findings.map((finding) => finding.severity), ["CRITICAL", "HIGH", "HIGH", "HIGH", "HIGH"]);
   assert.ok(findings.every((finding) => finding.impact.length > 40));
   assert.match(deck, /ArrowRight/);
+  assert.match(deck, /URLSearchParams/);
+  assert.match(deck, /popstate/);
+  assert.match(deck, /ASCII_SPIDER/);
+  assert.doesNotMatch(deck, /-hrr-/);
   assert.match(deck, /SPYDR builds a graph/);
   assert.match(deck, /SPYDR finds where input/);
   assert.match(deck, /SPYDR tests one idea/);
