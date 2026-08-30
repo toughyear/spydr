@@ -34,6 +34,8 @@ target
 
 ## Try the replay
 
+Public deck: https://spydr-red-team.vercel.app
+
 ```bash
 npm install
 npm run demo

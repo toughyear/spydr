@@ -39,4 +39,4 @@ https://github.com/toughyear/spydr
 
 ## Demo
 
-Add the hosted URL after publishing the site.
+https://spydr-red-team.vercel.app
