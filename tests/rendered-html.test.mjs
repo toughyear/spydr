@@ -52,6 +52,8 @@ test("keeps recon and finding evidence in structured data", async () => {
   assert.deepEqual(findings.map((finding) => finding.severity), ["CRITICAL", "HIGH", "HIGH", "HIGH", "HIGH", "HIGH"]);
   assert.equal(findings[1].short, "Global feature flags");
   assert.ok(findings.every((finding) => finding.impact.length > 40));
+  assert.ok(findings.every((finding) => Number(finding.score) >= 8));
+  assert.ok(findings.every((finding) => finding.limit.length > 40));
   assert.match(deck, /ArrowRight/);
   assert.match(deck, /URLSearchParams/);
   assert.match(deck, /popstate/);
@@ -61,14 +63,14 @@ test("keeps recon and finding evidence in structured data", async () => {
   assert.match(deck, /hubRoot/);
   assert.match(deck, /docs\.runloop\.ai/);
   assert.match(deck, /app\.runloop\.ai/);
-  assert.match(deck, /ATTACK PATH PROVEN/);
+  assert.match(deck, /PROVEN ATTACK PATH/);
   assert.match(deck, /accessPass/);
   assert.doesNotMatch(deck, /-hrr-/);
   assert.match(deck, /SPYDR builds a graph/);
   assert.match(deck, /SPYDR finds where input/);
   assert.match(deck, /SPYDR tests one idea/);
   assert.match(deck, /SPYDR reports only/);
-  assert.match(deck, /FINDING \$\{number\} OF/);
-  assert.match(deck, />PROVEN</);
+  assert.match(deck, /RUNLOOP\.AI \/ FINDING/);
+  assert.match(deck, /01 \/ EVIDENCE/);
   assert.doesNotMatch(deck, /\b(?:I|we|We|me|my|our|Our)\b/);
 });

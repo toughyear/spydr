@@ -65,34 +65,40 @@ function Frame({
 }
 
 function FindingSlide({ finding, number }: { finding: Finding; number: number }) {
-  const severityBars = finding.severity === "CRITICAL"
-    ? [18, 24, 31, 27, 39, 46, 41, 58, 67, 61, 78, 100]
-    : [14, 20, 24, 22, 31, 37, 34, 45, 52, 49, 61, 74];
+  const score = Number(finding.score);
+  const heatCells = Array.from({ length: 70 }, (_, cell) => {
+    const column = cell % 14;
+    const row = Math.floor(cell / 14);
+    const signal = (column * 13 + row * 7 + number * 11) % 10;
+    const base = score >= 9 ? 3 : score >= 8 ? 2 : 1;
+    return Math.min(4, Math.max(0, base + (signal > 6 ? 1 : 0) - (signal < 2 ? 1 : 0)));
+  });
 
   return (
     <Frame
-      chapter={`FINDING ${number} OF ${findings.length}`}
-      title={finding.severity}
+      chapter={`RUNLOOP.AI / FINDING ${String(number).padStart(2, "0")}`}
+      title={finding.title}
       className={`findingSlide finding${finding.severity}`}
     >
-      <div className="findingLive"><i />LIVE ON RUNLOOP.AI</div>
+      <div className="findingLive"><i />ACTIVE FINDING</div>
       <div className="findingSummary">
-        <div><h3>{finding.title}</h3><p className="findingImpact"><span>IMPACT</span>{finding.impact}</p></div>
-        <div className="severityMeter" aria-label={`${finding.severity} severity signal`}>
-          <span>SEVERITY SIGNAL</span>
-          <div>{severityBars.map((height, barIndex) => <i key={`${height}-${barIndex}`} style={{ height: `${height}%`, animationDelay: `${barIndex * 45}ms` }} />)}</div>
-          <b>{finding.severity}</b>
-        </div>
+        <div className="findingImpact"><span>WHAT A CUSTOMER CAN DO</span><p>{finding.impact}</p></div>
+        <aside className="riskCard" aria-label={`CVSS ${finding.score}, ${finding.severity}`}>
+          <div className="riskScore"><span>CVSS 3.1</span><b>{finding.score}</b><strong>{finding.severity}</strong></div>
+          <div className="riskHeatmap" aria-hidden="true">{heatCells.map((level, cell) => <i className={`heat${level}`} style={{ animationDelay: `${cell * 8}ms` }} key={cell} />)}</div>
+          <div className="riskLegend"><span>LOW</span><i /><i /><i /><i /><span>CRITICAL</span></div>
+        </aside>
       </div>
-      <div className="findingPathLabel"><i />ATTACK PATH PROVEN</div>
+      <div className="findingPathLabel"><i />PROVEN ATTACK PATH</div>
       <div className="findingPath">
         {finding.path.map((step, index) => (
           <div key={step}><i /><span>{step}</span><b>{String(index + 1).padStart(2, "0")}</b></div>
         ))}
       </div>
       <div className="findingDetails">
-        <div><span>PROVEN</span><p>{finding.proof}</p></div>
-        <div><span>FIX</span><p>{finding.fix}</p></div>
+        <div><span>01 / EVIDENCE</span><p>{finding.proof}</p></div>
+        <div><span>02 / LIMIT</span><p>{finding.limit}</p></div>
+        <div><span>03 / FIX</span><p>{finding.fix}</p></div>
       </div>
       <p className="findingNotice">RUNLOOP TEAM: PLEASE REVIEW AFTER THE HACKATHON. CONTACT RAJEEV AT RAJIVSINGH430@GMAIL.COM</p>
     </Frame>

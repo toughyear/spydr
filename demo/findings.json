@@ -1,56 +1,68 @@
 [
   {
     "severity": "CRITICAL",
+    "score": "9.1",
     "short": "Cross-user secret use",
     "title": "Cross-user secret use",
     "impact": "A normal Member can make Runloop use another user's private API key or secret when the gateway ID is known.",
     "path": ["Member", "another user's gateway ID", "agent launch", "other user's credential"],
     "proof": "The Member could not list or open the private gateway. The Member supplied its ID during an agent launch. Runloop then used the gateway owner's test credential.",
+    "limit": "A known gateway ID and same-organization access were confirmed. Cross-organization use was not proven.",
     "fix": "Check the owner and organization each time Runloop uses a gateway ID."
   },
   {
     "severity": "HIGH",
+    "score": "8.1",
     "short": "Global feature flags",
     "title": "Tenant Owner controls global flags",
     "impact": "A self-service tenant Owner can reach a platform-level write path for feature flags that apply across the whole Runloop deployment.",
     "path": ["tenant Owner", "global flag API", "deployment-wide setting", "HTTP 200"],
     "proof": "The account was denied platform-admin routes. SPYDR listed global flags and replayed the current value of one global flag. Runloop returned HTTP 200 and the value stayed unchanged.",
+    "limit": "No live global value was changed. Further admin privilege escalation was not tested.",
     "fix": "Require platform-admin permission for every read or write of a global flag."
   },
   {
     "severity": "HIGH",
+    "score": "8.2",
     "short": "Sandbox SSRF",
     "title": "SSRF from the sandbox",
     "impact": "A sandbox user can make a Runloop gateway send requests to services on the local network outside the sandbox.",
     "path": ["agent request", "Runloop gateway", "local network address", "live response"],
     "proof": "A test callback showed that the request came from a Runloop gateway service, not the Devbox. A local network target returned a live HTTP response.",
+    "limit": "No cloud credential, metadata token, or internal secret was obtained.",
     "fix": "Block private network addresses before each request and after each redirect."
   },
   {
     "severity": "HIGH",
+    "score": "8.1",
     "short": "OAuth setup SSRF",
     "title": "OAuth SSRF before agent launch",
     "impact": "A user can make Reflex send an OAuth registration request to a service on the local network before any agent runs.",
     "path": ["MCP address", "OAuth setup", "redirect", "local address"],
     "proof": "Before an MCP setup or agent existed, the Reflex server fetched a selected OAuth file. A test redirect sent its registration request to a local address.",
+    "limit": "No cloud token or internal response body was obtained through this path.",
     "fix": "Allow only public HTTPS addresses during OAuth setup. Check the address again after each redirect."
   },
   {
     "severity": "HIGH",
+    "score": "8.6",
     "short": "SSRF response leak",
     "title": "SSRF with response data",
     "impact": "A user can make Runloop fetch a selected address and return part of the response. Reachable service data can appear in the error.",
     "path": ["MCP address", "Runloop server", "server error", "response shown to user"],
     "proof": "A test server returned a unique marker in an HTTP 500 response. The same marker appeared in the MCP connection error shown to the user.",
+    "limit": "The response oracle was proven with an owned marker. Sensitive internal data was not accessed.",
     "fix": "Allow only public HTTPS addresses. Check each redirect. Do not show server response bodies to the user."
   },
   {
     "severity": "HIGH",
+    "score": "8.1",
     "short": "CLI arbitrary file read",
     "title": "CLI arbitrary file read",
     "impact": "An agent connected to a Mac can read files outside the selected folder with the permissions of the connected Mac user.",
     "path": ["connected agent", "command tool", "Mac shell", "file outside selected folder"],
     "proof": "The file tool blocked a test file outside the selected folder. The command tool read the same file from the connected Mac.",
+    "limit": "The read used the connected Mac user's permissions. No privilege escalation was shown.",
     "fix": "Apply the selected folder limit to commands and subprocesses, not only the file tool."
   }
 ]

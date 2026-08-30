@@ -145,23 +145,27 @@ a { color: inherit; text-decoration: none; }
 .loopSteps span { color: var(--muted); font: 9px var(--font-geist-mono), monospace; }
 .loopSteps b { color: var(--acid); font: 800 10px var(--font-geist-mono), monospace; letter-spacing: .08em; }
 
-.findingSlide { --severity: #934026; --severityBright: #ff7652; box-shadow: inset 14px 0 0 var(--severity); background: radial-gradient(circle at 84% 15%, color-mix(in srgb, var(--severity) 24%, transparent), transparent 32%), #0b0b0a; }
-.findingCRITICAL { --severity: #79191f; --severityBright: #ff4650; }
-.findingHIGH { --severity: #934026; --severityBright: #ff7652; }
-.findingSlide h2 { max-width: none; margin-top: -5px; color: var(--severityBright); font-family: var(--font-geist-mono), monospace; font-size: clamp(4.2rem, 8.5vw, 9rem); font-weight: 900; line-height: .82; letter-spacing: -.08em; text-shadow: 0 0 38px color-mix(in srgb, var(--severityBright) 18%, transparent); }
-.findingLive { position: absolute; top: clamp(28px, 5vw, 74px); right: clamp(20px, 7vw, 110px); display: flex; align-items: center; gap: 9px; padding: 8px 10px; border: 1px solid color-mix(in srgb, var(--severityBright) 42%, transparent); background: color-mix(in srgb, var(--severity) 22%, #0b0b0a); color: var(--severityBright); font: 900 9px var(--font-geist-mono), monospace; letter-spacing: .1em; }
-.findingLive i { width: 8px; height: 8px; border-radius: 50%; background: var(--severityBright); box-shadow: 0 0 0 0 color-mix(in srgb, var(--severityBright) 55%, transparent); animation: livePulse 1.5s ease-out infinite; }
-.findingSummary { display: grid; grid-template-columns: minmax(0, 1fr) minmax(210px, 290px); gap: clamp(24px, 5vw, 70px); align-items: end; margin-top: 16px; }
-.findingSummary h3 { margin: 0; color: var(--paper); font-size: clamp(1.45rem, 2.5vw, 2.6rem); line-height: 1; letter-spacing: -.045em; }
-.findingImpact { max-width: 720px; margin: 12px 0 0; color: #c5c3ba; font-size: clamp(.92rem, 1.35vw, 1.2rem); line-height: 1.32; }
-.findingImpact span { display: block; margin-bottom: 6px; color: var(--severityBright); font: 900 8px var(--font-geist-mono), monospace; letter-spacing: .12em; }
-.severityMeter { min-width: 0; padding: 12px 14px 10px; border: 1px solid var(--line); background: rgba(0,0,0,.2); }
-.severityMeter > span { display: block; color: #6f6d66; font: 850 7px var(--font-geist-mono), monospace; letter-spacing: .12em; }
-.severityMeter > div { height: 64px; display: flex; align-items: end; gap: 5px; margin-top: 9px; padding-top: 8px; border-bottom: 1px solid #3b3935; background: repeating-linear-gradient(0deg, transparent 0 15px, rgba(255,255,255,.035) 15px 16px); }
-.severityMeter i { flex: 1; min-width: 4px; background: linear-gradient(180deg, var(--severityBright), var(--severity)); transform: scaleY(0); transform-origin: bottom; animation: severityRise .42s ease-out forwards; }
-.severityMeter i:last-child { box-shadow: 0 0 16px color-mix(in srgb, var(--severityBright) 35%, transparent); }
-.severityMeter b { display: block; margin-top: 7px; color: var(--severityBright); font: 900 9px var(--font-geist-mono), monospace; text-align: right; letter-spacing: .12em; }
-.findingPathLabel { display: flex; align-items: center; gap: 8px; margin-top: 20px; color: var(--severityBright); font: 900 7px var(--font-geist-mono), monospace; letter-spacing: .12em; }
+.findingSlide { --severity: #b34c2f; --severityBright: #ff7652; --heat1: #3c1e18; --heat2: #713024; --heat3: #b34c2f; --heat4: #ff7652; box-shadow: inset 4px 0 0 var(--severityBright); background: radial-gradient(circle at 77% 8%, color-mix(in srgb, var(--severity) 15%, transparent), transparent 30%), linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px), #0a0a09; background-size: auto, 42px 42px, 42px 42px, auto; }
+.findingCRITICAL { --severity: #a51f2a; --severityBright: #ff4d5b; --heat1: #341217; --heat2: #691820; --heat3: #a51f2a; --heat4: #ff4d5b; }
+.findingHIGH { --severity: #b34c2f; --severityBright: #ff7652; }
+.findingSlide h2 { max-width: 910px; color: var(--paper); font-size: clamp(2.8rem, 5.1vw, 5.8rem); line-height: .9; letter-spacing: -.065em; text-wrap: balance; }
+.findingLive { position: absolute; top: clamp(28px, 5vw, 74px); right: clamp(20px, 7vw, 110px); display: flex; align-items: center; gap: 9px; padding: 8px 10px; border: 1px solid color-mix(in srgb, var(--severityBright) 42%, transparent); background: rgba(10,10,9,.76); color: var(--severityBright); font: 900 8px var(--font-geist-mono), monospace; letter-spacing: .12em; }
+.findingLive i { width: 7px; height: 7px; border-radius: 50%; background: var(--severityBright); box-shadow: 0 0 0 0 color-mix(in srgb, var(--severityBright) 55%, transparent); animation: livePulse 1.5s ease-out infinite; }
+.findingSummary { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 330px); gap: clamp(26px, 5vw, 72px); align-items: stretch; margin-top: clamp(20px, 3vh, 34px); }
+.findingImpact { min-width: 0; padding: 18px 20px; border: 1px solid var(--line); border-left: 3px solid var(--severityBright); background: rgba(255,255,255,.025); }
+.findingImpact span { display: block; margin-bottom: 10px; color: var(--severityBright); font: 900 8px var(--font-geist-mono), monospace; letter-spacing: .12em; }
+.findingImpact p { max-width: 760px; margin: 0; color: #cfcdc5; font-size: clamp(1rem, 1.55vw, 1.35rem); line-height: 1.35; letter-spacing: -.018em; }
+.riskCard { min-width: 0; display: grid; grid-template-columns: 112px 1fr; grid-template-rows: 1fr auto; gap: 12px 16px; padding: 15px; border: 1px solid color-mix(in srgb, var(--severityBright) 28%, var(--line)); background: rgba(0,0,0,.34); }
+.riskScore { grid-row: 1 / 3; display: flex; flex-direction: column; justify-content: space-between; padding-right: 14px; border-right: 1px solid var(--line); }
+.riskScore span { color: #77756e; font: 850 7px var(--font-geist-mono), monospace; letter-spacing: .12em; }
+.riskScore b { color: var(--paper); font: 900 clamp(2.8rem, 4vw, 4.4rem)/.82 var(--font-geist-mono), monospace; letter-spacing: -.09em; }
+.riskScore strong { color: var(--severityBright); font: 900 8px var(--font-geist-mono), monospace; letter-spacing: .13em; }
+.riskHeatmap { align-self: end; display: grid; grid-template-columns: repeat(14, 1fr); gap: 3px; }
+.riskHeatmap i { aspect-ratio: 1; min-width: 4px; border-radius: 1px; background: #20201d; opacity: 0; animation: heatIn .24s ease-out forwards; }
+.riskHeatmap .heat1 { background: var(--heat1); }.riskHeatmap .heat2 { background: var(--heat2); }.riskHeatmap .heat3 { background: var(--heat3); }.riskHeatmap .heat4 { background: var(--heat4); box-shadow: 0 0 6px color-mix(in srgb, var(--severityBright) 24%, transparent); }
+.riskLegend { display: flex; align-items: center; justify-content: flex-end; gap: 4px; color: #5f5d57; font: 750 6px var(--font-geist-mono), monospace; letter-spacing: .07em; }
+.riskLegend i { width: 7px; height: 7px; background: var(--heat1); }.riskLegend i:nth-of-type(2) { background: var(--heat2); }.riskLegend i:nth-of-type(3) { background: var(--heat3); }.riskLegend i:nth-of-type(4) { background: var(--heat4); }
+.findingPathLabel { display: flex; align-items: center; gap: 8px; margin-top: 18px; color: var(--severityBright); font: 900 7px var(--font-geist-mono), monospace; letter-spacing: .12em; }
 .findingPathLabel i { width: 7px; height: 7px; border-radius: 50%; background: var(--severityBright); box-shadow: 0 0 10px color-mix(in srgb, var(--severityBright) 55%, transparent); }
 .findingPath { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 9px; padding-top: 2px; }
 .findingPath::before { content: ""; position: absolute; left: 9px; right: 9px; top: 10px; height: 3px; background: linear-gradient(90deg, var(--severityBright), #4b4944); transform: scaleX(0); transform-origin: left; animation: lineGrow .9s ease-out forwards .25s; }
@@ -170,12 +174,12 @@ a { color: inherit; text-decoration: none; }
 .findingPath i { width: 18px; height: 18px; border: 4px solid var(--severityBright); border-radius: 50%; background: #0d0d0c; box-shadow: 0 0 0 4px #0d0d0c; }
 .findingPath span { min-width: 0; padding-right: 16px; color: #d0cec6; font: 800 clamp(.66rem, .95vw, .82rem)/1.3 var(--font-geist-mono), monospace; text-transform: uppercase; }
 .findingPath b { grid-column: 2; color: #575650; font: 800 8px var(--font-geist-mono), monospace; }
-.findingDetails { display: grid; grid-template-columns: 1.25fr 1fr; margin-top: 18px; border-top: 1px solid var(--line); }
-.findingDetails > div { padding: 14px 28px 0 0; }
-.findingDetails > div + div { padding-left: 28px; border-left: 1px solid var(--line); }
+.findingDetails { display: grid; grid-template-columns: 1.15fr .85fr 1fr; margin-top: 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.findingDetails > div { min-width: 0; padding: 13px 24px 14px 0; }
+.findingDetails > div + div { padding-left: 24px; border-left: 1px solid var(--line); }
 .findingDetails span, .truthColumns span { color: var(--severityBright); font: 900 8px var(--font-geist-mono), monospace; letter-spacing: .1em; }
-.findingDetails p { max-width: 640px; margin: 8px 0 0; color: #9e9c94; font-size: clamp(.78rem, 1vw, .92rem); line-height: 1.42; }
-.findingNotice { margin: 14px 0 0; color: #6f6d66; font: 850 7px/1.5 var(--font-geist-mono), monospace; letter-spacing: .08em; }
+.findingDetails p { max-width: 640px; margin: 7px 0 0; color: #9e9c94; font-size: clamp(.72rem, .88vw, .84rem); line-height: 1.4; }
+.findingNotice { margin: 11px 0 0; color: #62615c; font: 850 7px/1.5 var(--font-geist-mono), monospace; letter-spacing: .08em; }
 
 .truthColumns { margin: auto 0; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
 .truthColumns > div { padding: 28px 40px 0 0; }
@@ -220,7 +224,7 @@ a { color: inherit; text-decoration: none; }
 @keyframes hubEdgeVertical { 0%, 12% { transform: scaleY(0); opacity: .15; } 48%, 82% { transform: scaleY(1); opacity: 1; } 100% { opacity: .1; } }
 @keyframes hubEdgeVerticalReverse { 0%, 12% { transform: scaleY(0); opacity: .15; } 48%, 82% { transform: scaleY(1); opacity: 1; } 100% { opacity: .1; } }
 @keyframes livePulse { to { box-shadow: 0 0 0 9px transparent; } }
-@keyframes severityRise { to { transform: scaleY(1); } }
+@keyframes heatIn { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
 @keyframes passAdmit { from { opacity: 0; transform: translateY(20px) rotate(-2deg) scale(.97); } to { opacity: 1; transform: rotate(-.6deg); } }
 @keyframes trustTravel { 0% { left: -10px; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: calc(100% + 10px); opacity: 0; } }
 @keyframes spiderBreathe { 50% { opacity: .2; transform: translateY(-50%) scale(1.018); } }
@@ -263,21 +267,27 @@ a { color: inherit; text-decoration: none; }
   .graphModel span { min-height: 86px; padding: 9px; font-size: 8px; }
   .loopSteps { grid-template-columns: repeat(2, 1fr); }
   .loopSteps div { min-height: 80px; }
-  .findingSlide { box-shadow: inset 7px 0 0 var(--severity); }
-  .findingSlide h2 { font-size: clamp(3.2rem, 15vw, 5rem); }
+  .findingSlide { box-shadow: inset 3px 0 0 var(--severityBright); }
+  .findingSlide h2 { font-size: clamp(2.35rem, 10.5vw, 4rem); }
   .findingLive { position: static; width: fit-content; margin-top: 8px; padding: 6px 8px; font-size: 7px; }
   .findingSummary { grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
-  .findingSummary h3 { font-size: 1.3rem; }
-  .findingImpact { margin-top: 7px; font-size: .84rem; }
-  .severityMeter { display: none; }
+  .findingImpact { padding: 11px 12px; }
+  .findingImpact span { margin-bottom: 6px; font-size: 7px; }
+  .findingImpact p { font-size: .82rem; }
+  .riskCard { grid-template-columns: 78px 1fr; gap: 8px 10px; padding: 9px 10px; }
+  .riskScore { padding-right: 9px; }
+  .riskScore b { font-size: 2.35rem; }
+  .riskHeatmap { gap: 2px; }
+  .riskLegend { display: none; }
   .findingPathLabel { margin-top: 10px; }
   .findingPath span { padding-right: 6px; font-size: 7px; }
   .findingPath i { width: 13px; height: 13px; border-width: 3px; }
   .findingPath::before { top: 7px; }
-  .findingDetails { grid-template-columns: 1fr; margin-top: 14px; }
-  .findingDetails > div { padding-top: 9px; }
-  .findingDetails > div + div { padding-left: 0; border-left: 0; }
-  .findingDetails p { font-size: .72rem; }
+  .findingDetails { grid-template-columns: 1fr 1fr; margin-top: 12px; }
+  .findingDetails > div { padding: 8px 10px 8px 0; }
+  .findingDetails > div + div { padding-left: 10px; }
+  .findingDetails > div:nth-child(3) { display: none; }
+  .findingDetails p { font-size: .68rem; }
   .truthColumns { grid-template-columns: 1fr; }
   .truthColumns > div + div { padding-left: 0; border-left: 0; border-top: 1px solid rgba(16,16,15,.25); margin-top: 16px; }
   .truthColumns > div { padding-top: 18px; }
@@ -298,8 +308,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .slideStage, .graphModel > *, .authorityPath > *, .loopSteps div, .domainGrid span, .docConcepts > *, .findingPath div, .crawlNode, .hubRoot, .hubEdge::after, .hubStatus i, .findingLive i, .severityMeter i, .crawlPulse, .reconTerminal::after, .coverSpider, .accessPass { animation: none; opacity: 1; }
-  .hubEdge::after, .severityMeter i { transform: none; }
+  .slideStage, .graphModel > *, .authorityPath > *, .loopSteps div, .domainGrid span, .docConcepts > *, .findingPath div, .crawlNode, .hubRoot, .hubEdge::after, .hubStatus i, .findingLive i, .riskHeatmap i, .crawlPulse, .reconTerminal::after, .coverSpider, .accessPass { animation: none; opacity: 1; }
+  .hubEdge::after, .riskHeatmap i { transform: none; }
   .graphModel::before, .findingPath::before { animation: none; transform: scaleX(1); }
   .authorityPath::after { display: none; }
   .progress i { transition: none; }
