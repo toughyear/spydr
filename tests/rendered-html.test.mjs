@@ -26,10 +26,11 @@ test("renders the SPYDR tap-through deck", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
 
-  assert.match(html, /<title>SPYDR — Autonomous Red Team<\/title>/i);
+  assert.match(html, /<title>SPYDR \| Autonomous Red Team<\/title>/i);
   assert.match(html, /SPYDR \/ CODEX COMMUNITY HACKATHON/);
-  assert.match(html, /used Runloop/);
-  assert.match(html, /red-team Runloop/);
+  assert.match(html, /SPYDR is your/);
+  assert.match(html, /autonomous red team/);
+  assert.match(html, /found 5 active vulnerabilities in Runloop/);
   assert.match(html, /1 CRITICAL/);
   assert.match(html, /4 HIGH/);
   assert.match(html, /aria-label="Next slide"/);
@@ -50,6 +51,11 @@ test("keeps recon and finding evidence in structured data", async () => {
   assert.equal(findings.length, 5);
   assert.deepEqual(findings.map((finding) => finding.severity), ["CRITICAL", "HIGH", "HIGH", "HIGH", "HIGH"]);
   assert.match(deck, /ArrowRight/);
-  assert.match(deck, /Every guess had to/);
-  assert.match(deck, /Strong findings say/);
+  assert.match(deck, /I build a map/);
+  assert.match(deck, /I find where normal input/);
+  assert.match(deck, /I test one idea/);
+  assert.match(deck, /I report only/);
+  assert.match(deck, /FINDING \$\{number\} OF/);
+  assert.match(deck, />PROOF</);
+  assert.doesNotMatch(deck, /I DID NOT CLAIM/);
 });

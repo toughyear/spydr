@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const title = "SPYDR — Autonomous Red Team";
+const title = "SPYDR | Autonomous Red Team";
 const description =
-  "SPYDR used Runloop to red-team Runloop and found real runtime security boundaries that source review alone could not prove.";
+  "SPYDR is your autonomous red team. Give it a domain. It finds and proves security bugs in the live product.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();

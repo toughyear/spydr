@@ -5,8 +5,8 @@
 SPYDR learns a product from the outside, attacks its assumptions at runtime,
 and proves which paths lead to real impact.
 
-> We used Runloop to red-team Runloop—and found real runtime security
-> boundaries that source review alone could not prove.
+> Proof: SPYDR found five vulnerabilities in Runloop, one Critical and four
+> High, including runtime security boundaries source review alone could not prove.
 
 ## Why it exists
 

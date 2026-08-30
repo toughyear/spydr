@@ -24,7 +24,7 @@ a { color: inherit; text-decoration: none; }
 .progress { background: #272723; }
 .progress i { display: block; height: 100%; background: var(--acid); transition: width .32s ease; }
 .slideStage { min-height: 0; overflow: hidden; animation: enter .28s ease-out both; }
-.slide { height: 100%; overflow: auto; position: relative; padding: clamp(28px, 5vw, 74px) clamp(20px, 7vw, 110px); display: grid; grid-template-columns: minmax(130px, 220px) 1fr; gap: clamp(24px, 5vw, 80px); background:
+.slide { height: 100%; overflow: hidden; position: relative; padding: clamp(28px, 5vw, 74px) clamp(20px, 7vw, 110px); display: grid; grid-template-columns: minmax(130px, 220px) 1fr; gap: clamp(24px, 5vw, 80px); background:
   linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
   linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px), var(--ink);
   background-size: 42px 42px;
@@ -38,8 +38,9 @@ a { color: inherit; text-decoration: none; }
 .slide h2 { max-width: 980px; margin: 0; font-size: clamp(3.1rem, 7.4vw, 8.1rem); line-height: .88; letter-spacing: -.068em; font-weight: 820; text-wrap: balance; }
 .heroCopy, .bigAnswer, .bigQuestion { max-width: 930px; margin: auto 0 0; font-size: clamp(1.5rem, 3.2vw, 3.5rem); line-height: 1.08; letter-spacing: -.04em; }
 .heroCopy { color: #bbb9b0; }
-.coverStamp { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 34px; }
-.coverStamp span { padding: 10px 12px; border: 1px solid var(--line); color: var(--acid); font: 800 10px var(--font-geist-mono), monospace; letter-spacing: .1em; }
+.coverProof { display: grid; grid-template-columns: 95px 1fr auto; gap: 22px; align-items: center; margin-top: 34px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.coverProof span, .coverProof em { color: var(--acid); font: 800 10px var(--font-geist-mono), monospace; font-style: normal; letter-spacing: .1em; }
+.coverProof strong { font-size: clamp(1rem, 1.7vw, 1.45rem); letter-spacing: -.025em; }
 .singleLine { margin: auto 0 0; color: #aaa89f; font-size: clamp(1rem, 1.5vw, 1.35rem); }
 .darkText { color: #4d4c46; }
 
@@ -63,6 +64,29 @@ a { color: inherit; text-decoration: none; }
 .bigQuestion { color: var(--acid); }
 .authorityPath { margin-top: auto; border-color: var(--line); color: #aaa89f; }
 .authorityPath .hot { color: var(--signal); }
+.authorityPath > * { opacity: 0; animation: graphIn .34s ease-out forwards; }
+.authorityPath > :nth-child(2) { animation-delay: .12s; }
+.authorityPath > :nth-child(3) { animation-delay: .24s; }
+.authorityPath > :nth-child(4) { animation-delay: .36s; }
+.authorityPath > :nth-child(5) { animation-delay: .48s; }
+.authorityPath > :nth-child(6) { animation-delay: .6s; }
+.authorityPath > :nth-child(7) { animation-delay: .72s; }
+
+.graphModel { margin: auto 0; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1.25fr; align-items: stretch; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.graphModel > * { opacity: 0; animation: graphIn .34s ease-out forwards; }
+.graphModel > :nth-child(2) { animation-delay: .1s; }
+.graphModel > :nth-child(3) { animation-delay: .2s; }
+.graphModel > :nth-child(4) { animation-delay: .3s; }
+.graphModel > :nth-child(5) { animation-delay: .4s; }
+.graphModel > :nth-child(6) { animation-delay: .5s; }
+.graphModel > :nth-child(7) { animation-delay: .6s; }
+.graphModel > :nth-child(8) { animation-delay: .7s; }
+.graphModel > :nth-child(9) { animation-delay: .8s; }
+.graphModel span { min-height: 116px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; color: var(--paper); font: 850 clamp(.72rem, 1.05vw, .95rem) var(--font-geist-mono), monospace; letter-spacing: .04em; }
+.graphModel span i { color: var(--muted); font: 800 8px var(--font-geist-mono), monospace; font-style: normal; letter-spacing: .1em; }
+.graphModel b { display: grid; place-items: center; color: var(--muted); font: 800 7px var(--font-geist-mono), monospace; writing-mode: vertical-rl; letter-spacing: .08em; }
+.graphModel .graphHot { background: var(--signal); color: var(--ink); }
+.graphModel .graphHot i { color: rgba(16,16,15,.58); }
 
 .roleCard { width: min(680px, 100%); margin: auto 0; border: 2px solid var(--ink); padding: clamp(24px, 4vw, 48px); display: grid; grid-template-columns: 110px 1fr; gap: 26px; }
 .roleCard span { font: 900 10px var(--font-geist-mono), monospace; letter-spacing: .1em; }
@@ -70,22 +94,29 @@ a { color: inherit; text-decoration: none; }
 .roleCard p { grid-column: 2; margin: 12px 0 0; line-height: 1.55; }
 
 .loopSteps { margin: auto 0; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-.loopSteps div { min-height: 145px; padding: 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; }
+.loopSteps div { min-height: 145px; padding: 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; opacity: 0; animation: graphIn .35s ease-out forwards; }
+.loopSteps div:nth-child(2) { animation-delay: .12s; }
+.loopSteps div:nth-child(3) { animation-delay: .24s; }
+.loopSteps div:nth-child(4) { animation-delay: .36s; }
+.loopSteps div:nth-child(5) { animation-delay: .48s; }
 .loopSteps span { color: var(--muted); font: 9px var(--font-geist-mono), monospace; }
 .loopSteps b { color: var(--acid); font: 800 10px var(--font-geist-mono), monospace; letter-spacing: .08em; }
 
 .findingSlide h2 { font-size: clamp(3rem, 6.5vw, 7rem); }
+.findingCritical { box-shadow: inset 10px 0 0 var(--signal); }
 .findingPath { margin: auto 0 0; border-color: rgba(16,16,15,.25); }
 .slide-light .findingPath b, .slide-red .findingPath b { color: #516100; }
-.findingProof { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 30px; border-top: 1px solid rgba(16,16,15,.25); }
+.findingProof { margin-top: 30px; border-top: 1px solid rgba(16,16,15,.25); }
 .findingProof > div { padding: 20px 30px 0 0; }
-.findingProof > div + div { padding-left: 30px; border-left: 1px solid rgba(16,16,15,.25); }
 .findingProof span, .truthColumns span { font: 900 9px var(--font-geist-mono), monospace; letter-spacing: .1em; }
 .findingProof p { margin: 12px 0 0; max-width: 600px; font-size: clamp(.92rem, 1.3vw, 1.12rem); line-height: 1.48; }
+.findingNotice { margin: 18px 0 0; color: #7f281d; font: 850 8px/1.5 var(--font-geist-mono), monospace; letter-spacing: .08em; }
 
 .truthColumns { margin: auto 0; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
 .truthColumns > div { padding: 28px 40px 0 0; }
 .truthColumns > div + div { padding-left: 40px; border-left: 1px solid var(--line); }
+.truthColumns.truthSingle { grid-template-columns: 1fr; }
+.truthColumns.truthSingle > div { max-width: 800px; }
 .truthColumns .yes { color: var(--acid); }
 .truthColumns .no { color: var(--signal); }
 .truthColumns p { color: #bbb9b0; font-size: clamp(1.15rem, 2vw, 2rem); line-height: 1.55; }
@@ -112,6 +143,7 @@ a { color: inherit; text-decoration: none; }
 
 @keyframes enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes blink { 50% { opacity: 0; } }
+@keyframes graphIn { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: none; } }
 
 @media (max-width: 780px) {
   .deck { min-height: 580px; grid-template-rows: 56px 3px 1fr 62px; }
@@ -120,16 +152,20 @@ a { color: inherit; text-decoration: none; }
   .slideChapter { padding: 0; }
   .slide h2 { font-size: clamp(2.65rem, 13vw, 5rem); }
   .heroCopy, .bigAnswer, .bigQuestion { margin-top: auto; font-size: clamp(1.3rem, 6vw, 2rem); }
+  .coverProof { grid-template-columns: 1fr; gap: 8px; margin-top: 22px; padding-block: 14px; }
   .domainGrid { grid-template-columns: 1fr 1fr; }
   .domainGrid span { font-size: 8px; padding-inline: 8px; }
   .reconSlide h2 { font-size: 2.5rem; }
   .docConcepts, .authorityPath, .findingPath { gap: 8px; }
   .docConcepts b, .authorityPath b, .findingPath b { margin-left: 8px; }
   .roleCard { margin: auto 0; grid-template-columns: 75px 1fr; }
+  .graphModel { grid-template-columns: repeat(5, 1fr); }
+  .graphModel b { display: none; }
+  .graphModel span { min-height: 86px; padding: 9px; font-size: 8px; }
   .loopSteps { grid-template-columns: repeat(2, 1fr); }
   .loopSteps div { min-height: 80px; }
-  .findingProof, .truthColumns { grid-template-columns: 1fr; }
-  .findingProof > div + div, .truthColumns > div + div { padding-left: 0; border-left: 0; border-top: 1px solid rgba(16,16,15,.25); margin-top: 16px; }
+  .truthColumns { grid-template-columns: 1fr; }
+  .truthColumns > div + div { padding-left: 0; border-left: 0; border-top: 1px solid rgba(16,16,15,.25); margin-top: 16px; }
   .truthColumns > div { padding-top: 18px; }
   .truthColumns p { margin: 10px 0; }
   .fixList > div { grid-template-columns: 32px 1fr; padding-block: 9px; }
@@ -148,6 +184,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .slideStage { animation: none; }
+  .slideStage, .graphModel > *, .authorityPath > *, .loopSteps div { animation: none; opacity: 1; }
   .progress i { transition: none; }
 }

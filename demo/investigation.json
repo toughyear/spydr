@@ -1,6 +1,6 @@
 {
   "target": "Runloop",
-  "headline": "We used Runloop to red-team Runloop.",
+  "headline": "SPYDR is your autonomous red team.",
   "summary": "A sanitized replay of a real black-box investigation. Sensitive reproduction details are withheld for responsible disclosure.",
   "timeline": [
     {
@@ -45,7 +45,7 @@
       "label": "Prove",
       "status": "confirmed",
       "title": "Show the runtime boundary",
-      "detail": "The evidence confirmed a server-side request primitive outside the disposable sandbox. No cloud credential, cross-tenant data, or destructive impact was accessed.",
+      "detail": "The evidence confirmed that a Runloop service made the request outside the agent sandbox.",
       "metric": "1 proven path"
     },
     {
@@ -66,7 +66,6 @@
   ],
   "proof": {
     "confirmed": "The request was made by a Runloop-side service outside the disposable agent sandbox.",
-    "limited": "No cloud credential, private customer data, cross-tenant authority, or destructive action was obtained.",
     "next": "Block unsafe destinations after DNS resolution and revalidate every redirect hop."
   }
 }
