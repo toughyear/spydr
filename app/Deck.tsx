@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState, type ReactNode } from "react";
+import { FaSpider } from "react-icons/fa";
 import recon from "../demo/recon.json";
 import findings from "../demo/findings.json";
 
@@ -101,11 +102,14 @@ export function Deck() {
     </Frame>,
 
     <Frame key="seed" chapter="STEP 1 / START" title={<>SPYDR starts with<br />one domain.</>}>
-      <div className="seedWeb" aria-label="SPYDR crawls DNS, certificates, documentation, and the public app around runloop.ai">
-        <div className="seedRing seedRingOne" /><div className="seedRing seedRingTwo" />
-        <strong>runloop.ai<span className="blink">_</span></strong>
-        <span className="seedNode seedNodeOne">DNS</span><span className="seedNode seedNodeTwo">CERTS</span><span className="seedNode seedNodeThree">DOCS</span><span className="seedNode seedNodeFour">APP</span>
-        <i className="seedCrawler" />
+      <div className="crawlGraph" aria-label="SPYDR follows an orthogonal graph from runloop.ai through DNS, certificates, documentation, and the public app">
+        <i className="crawlEdge crawlEdgeOne" /><i className="crawlEdge crawlEdgeTwo" /><i className="crawlEdge crawlEdgeThree" /><i className="crawlEdge crawlEdgeFour" />
+        <span className="crawlNode crawlRoot"><b>START</b>runloop.ai</span>
+        <span className="crawlNode crawlDns"><b>LOOKUP</b>DNS</span>
+        <span className="crawlNode crawlCerts"><b>DISCOVER</b>CERTS</span>
+        <span className="crawlNode crawlDocs"><b>LEARN</b>DOCS</span>
+        <span className="crawlNode crawlApp"><b>TEST</b>APP</span>
+        <span className="crawlAgent" aria-hidden="true"><FaSpider /><b>SPYDR</b></span>
       </div>
       <p className="singleLine">SPYDR starts with public information. The view is the same as an outside user.</p>
     </Frame>,
@@ -129,7 +133,15 @@ export function Deck() {
     </Frame>,
 
     <Frame key="signup" chapter="STEP 4 / SIGN UP" title={<>SPYDR creates a normal<br />user account.</>} tone="light">
-      <div className="roleCard"><span>ROLE</span><strong>MEMBER</strong><p>Can launch agents.<br />Cannot manage private gateways.<br />Has no admin access.</p></div>
+      <div className="accessPass" aria-label="Runloop self-service access pass for SPYDR with Member role">
+        <div className="passHeader"><span>RUNLOOP ACCESS PASS</span><b>SELF SERVICE</b></div>
+        <div className="passBody">
+          <div className="passPhoto"><FaSpider /><span>SPYDR</span></div>
+          <dl><div><dt>ACCOUNT</dt><dd>SPYDR AGENT</dd></div><div><dt>ROLE</dt><dd>MEMBER</dd></div><div><dt>ACCESS</dt><dd>NORMAL CUSTOMER</dd></div></dl>
+          <div className="passRules"><span>CAN</span><b>Launch agents</b><span>CANNOT</span><b>Manage private gateways</b><span>ADMIN</span><b>None</b></div>
+        </div>
+        <div className="passFooter"><i /><span>RL-SPYDR-0829</span><strong>ADMITTED</strong></div>
+      </div>
       <p className="singleLine darkText">SPYDR uses the same self-service access as a normal customer.</p>
     </Frame>,
 
@@ -226,7 +238,7 @@ export function Deck() {
     <main className="deck" onPointerUp={tapThrough}>
       <header className="deckHeader">
         <button className="deckBrand" type="button" onClick={() => navigate(0)} aria-label="Go to the SPYDR cover">
-          <span className="asciiLogo" aria-hidden="true"><pre>{ASCII_SPIDER}</pre></span><b>SPYDR</b>
+          <FaSpider className="brandSpider" aria-hidden="true" /><b>SPYDR</b>
         </button>
         <span>CODEX × RUNLOOP</span>
       </header>
