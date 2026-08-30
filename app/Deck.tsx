@@ -65,14 +65,26 @@ function Frame({
 }
 
 function FindingSlide({ finding, number }: { finding: Finding; number: number }) {
+  const severityBars = finding.severity === "CRITICAL"
+    ? [18, 24, 31, 27, 39, 46, 41, 58, 67, 61, 78, 100]
+    : [14, 20, 24, 22, 31, 37, 34, 45, 52, 49, 61, 74];
+
   return (
     <Frame
-      chapter={`FINDING ${number} OF ${findings.length} / ACTIVE`}
-      title={finding.title}
+      chapter={`FINDING ${number} OF ${findings.length}`}
+      title={finding.severity}
       className={`findingSlide finding${finding.severity}`}
     >
-      <div className="findingStatus"><span>{finding.severity}</span><b>ACTIVE</b></div>
-      <p className="findingImpact"><span>IMPACT</span>{finding.impact}</p>
+      <div className="findingLive"><i />LIVE ON RUNLOOP.AI</div>
+      <div className="findingSummary">
+        <div><h3>{finding.title}</h3><p className="findingImpact"><span>IMPACT</span>{finding.impact}</p></div>
+        <div className="severityMeter" aria-label={`${finding.severity} severity signal`}>
+          <span>SEVERITY SIGNAL</span>
+          <div>{severityBars.map((height, barIndex) => <i key={`${height}-${barIndex}`} style={{ height: `${height}%`, animationDelay: `${barIndex * 45}ms` }} />)}</div>
+          <b>{finding.severity}</b>
+        </div>
+      </div>
+      <div className="findingPathLabel"><i />ATTACK PATH PROVEN</div>
       <div className="findingPath">
         {finding.path.map((step, index) => (
           <div key={step}><i /><span>{step}</span><b>{String(index + 1).padStart(2, "0")}</b></div>
@@ -102,14 +114,14 @@ export function Deck() {
     </Frame>,
 
     <Frame key="seed" chapter="STEP 1 / START" title={<>SPYDR starts with<br />one domain.</>}>
-      <div className="crawlGraph" aria-label="SPYDR follows an orthogonal graph from runloop.ai through DNS, certificates, documentation, and the public app">
-        <i className="crawlEdge crawlEdgeOne" /><i className="crawlEdge crawlEdgeTwo" /><i className="crawlEdge crawlEdgeThree" /><i className="crawlEdge crawlEdgeFour" />
-        <span className="crawlNode crawlRoot"><b>START</b>runloop.ai</span>
-        <span className="crawlNode crawlDns"><b>LOOKUP</b>DNS</span>
-        <span className="crawlNode crawlCerts"><b>DISCOVER</b>CERTS</span>
-        <span className="crawlNode crawlDocs"><b>LEARN</b>DOCS</span>
-        <span className="crawlNode crawlApp"><b>TEST</b>APP</span>
-        <span className="crawlAgent" aria-hidden="true"><FaSpider /><b>SPYDR</b></span>
+      <div className="crawlGraph hubGraph" aria-label="SPYDR expands runloop.ai into DNS and certificate lookup, docs.runloop.ai, app.runloop.ai, and reflex.runloop.ai">
+        <i className="hubEdge hubEdgeTop" /><i className="hubEdge hubEdgeRight" /><i className="hubEdge hubEdgeBottom" /><i className="hubEdge hubEdgeLeft" />
+        <span className="crawlNode hubRoot"><FaSpider aria-hidden="true" /><b>SEED DOMAIN</b>runloop.ai</span>
+        <span className="crawlNode hubTop"><b>READ</b>docs.runloop.ai</span>
+        <span className="crawlNode hubRight"><b>OPEN</b>app.runloop.ai</span>
+        <span className="crawlNode hubBottom"><b>CHECK</b>reflex.runloop.ai</span>
+        <span className="crawlNode hubLeft"><b>LOOK UP</b>DNS + CERTS</span>
+        <span className="hubStatus"><i />SURFACE EXPANDING</span>
       </div>
       <p className="singleLine">SPYDR starts with public information. The view is the same as an outside user.</p>
     </Frame>,

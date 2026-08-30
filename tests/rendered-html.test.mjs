@@ -57,6 +57,10 @@ test("keeps recon and finding evidence in structured data", async () => {
   assert.match(deck, /ASCII_SPIDER/);
   assert.match(deck, /FaSpider/);
   assert.match(deck, /crawlGraph/);
+  assert.match(deck, /hubRoot/);
+  assert.match(deck, /docs\.runloop\.ai/);
+  assert.match(deck, /app\.runloop\.ai/);
+  assert.match(deck, /ATTACK PATH PROVEN/);
   assert.match(deck, /accessPass/);
   assert.doesNotMatch(deck, /-hrr-/);
   assert.match(deck, /SPYDR builds a graph/);
