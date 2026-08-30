@@ -1,0 +1,47 @@
+[
+  {
+    "severity": "CRITICAL",
+    "short": "Cross-user credential use",
+    "title": "A Member could use another user's private gateway.",
+    "path": ["Member", "foreign gateway ID", "agent launch", "owner's credential used"],
+    "proof": "The Member could not list or read the private gateway. Supplying its raw ID during agent launch still produced a working opaque capability, and the control plane injected the owner's canary credential.",
+    "limit": "The attacker needs the high-entropy gateway ID. Cross-organization use and universal ID discovery were not demonstrated.",
+    "fix": "Enforce owner and organization authorization again when every attachment ID is resolved."
+  },
+  {
+    "severity": "HIGH",
+    "short": "Agent Gateway SSRF",
+    "title": "A sandboxed agent could steer a server-side gateway.",
+    "path": ["gateway URL", "opaque sandbox token", "Runloop service", "link-local HTTP"],
+    "proof": "An owned callback proved the request came from Runloop's gateway service, not the Devbox. A link-local target returned a live HTTP response.",
+    "limit": "IMDSv2 blocked credential retrieval. No metadata token, IAM role, cloud credential, or cross-tenant data was obtained.",
+    "fix": "Resolve and reject private destinations before connecting, then repeat validation after every redirect and DNS answer."
+  },
+  {
+    "severity": "HIGH",
+    "short": "OAuth preflight SSRF",
+    "title": "OAuth setup followed a public redirect into loopback.",
+    "path": ["chosen MCP URL", "OAuth discovery", "registration POST", "loopback redirect"],
+    "proof": "Before any MCP config or agent existed, the Reflex host fetched attacker-selected OAuth metadata. An owned 307 preserved its registration POST and redirected it into loopback without destination revalidation.",
+    "limit": "The tested path exposed no internal response body, cloud token, administrative action, or cross-tenant data. Distinct failures provided only a behavior oracle.",
+    "fix": "Allow public HTTPS OAuth endpoints only and re-resolve and revalidate discovery, registration, token, and redirect destinations."
+  },
+  {
+    "severity": "HIGH",
+    "short": "Response-bearing MCP SSRF",
+    "title": "The MCP test returned part of the server's response.",
+    "path": ["chosen MCP URL", "Runloop worker", "upstream error", "body reflected to caller"],
+    "proof": "A unique marker returned by an owned HTTP 500 endpoint appeared inside the authenticated connection-test error. A controlled redirect also converted POST to GET.",
+    "limit": "Only selected error bodies were reflected. No sensitive internal service, cloud credential, control-plane authority, or cross-organization data was reached.",
+    "fix": "Allow public HTTPS only, disable or revalidate redirects, and never reflect upstream bodies verbatim."
+  },
+  {
+    "severity": "HIGH",
+    "short": "Workstation boundary bypass",
+    "title": "The file boundary stopped files. The shell walked around it.",
+    "path": ["attached agent", "workstation command", "host shell", "outside selected directory"],
+    "proof": "The guarded file tool rejected an outside-root marker. The command tool read the same marker from the real connected Mac.",
+    "limit": "This requires a user to connect their own workstation with read-write access. It is not Runloop infrastructure compromise.",
+    "fix": "Apply the selected-root policy to commands, subprocesses, redirections, paths, and inherited environment."
+  }
+]

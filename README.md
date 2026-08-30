@@ -42,6 +42,9 @@ The demo is a deterministic, sanitized replay. It makes no network requests
 and needs no credentials. The public case study withholds sensitive
 reproduction details for responsible disclosure.
 
+The browser experience is a tap-through deck. Click the right side, use the
+visible controls, or press the arrow keys to walk from recon through proof.
+
 ## The agent swarm
 
 | Worker | Job |
@@ -84,10 +87,16 @@ Reflex to test Runloop itself.
 
 ## What the case study proves
 
-The sanitized replay proves that a controlled request was made by a
-Runloop-side service outside the disposable agent sandbox. It does **not**
-claim that SPYDR obtained cloud credentials, customer data, cross-tenant
-authority, or destructive impact.
+The public deck walks through five evidence-bounded findings:
+
+- a same-organization Member exercising another user's private gateway credential when the gateway ID is already known;
+- server-side gateway requests reaching a link-local HTTP service outside the disposable sandbox;
+- OAuth preflight following an attacker-directed registration redirect into loopback before any MCP config or agent exists;
+- an MCP connection test reflecting a controlled upstream error marker; and
+- a connected Workstation command escaping the directory boundary enforced by the file tools.
+
+It does **not** claim that SPYDR obtained cloud credentials, customer data,
+cross-organization authority, Runloop host compromise, or destructive impact.
 
 That distinction is the product: SPYDR reports what happened, what it means,
 and what remains unproven.
@@ -98,8 +107,8 @@ and what remains unproven.
 agents/                coordinator contract
 skills/                seven specialist worker skills
 server/                replay, shared context, and Runloop adapter boundary
-demo/investigation.json single sanitized source for the replay
-app/                    one-page hackathon explainer
+demo/                   certificate recon, findings, and terminal replay data
+app/                    tap-through hackathon deck
 ```
 
 ## Responsible use
