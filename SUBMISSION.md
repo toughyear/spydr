@@ -13,7 +13,8 @@ SPYDR
 **SPYDR is your autonomous red team.**
 
 - Give SPYDR a domain. It learns the product from the outside, tests the running system like an attacker, and proves which paths lead to real impact.
-- Proof: SPYDR found five vulnerabilities in Runloop, one Critical and four High.
+- Proof: SPYDR found six vulnerabilities in Runloop, one Critical and five High.
+- New High: a normal self-service tenant Owner reached a deployment-wide global flag write route and received HTTP 200, while platform-admin routes denied the same account.
 - A main Codex agent coordinates specialist security agents running inside isolated Runloop sandboxes.
 - Every worker contributes to one shared evidence graph: surfaces, workflows, attacker influence, hypotheses, probes, observations, and attack paths.
 - SPYDR performs reconnaissance, learns how the product works, creates competing security hypotheses, and runs small controlled probes against the live system.

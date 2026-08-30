@@ -7,7 +7,7 @@
 SPYDR learns a product from the outside, attacks its assumptions at runtime,
 and proves which paths lead to real impact.
 
-> Proof: SPYDR found five vulnerabilities in Runloop, one Critical and four
+> Proof: SPYDR found six vulnerabilities in Runloop, one Critical and five
 > High, including runtime security boundaries source review alone could not prove.
 
 ## Why it exists
@@ -89,9 +89,10 @@ Reflex to test Runloop itself.
 
 ## What the case study proves
 
-The public deck walks through five evidence-bounded findings:
+The public deck walks through six evidence-bounded findings:
 
 - a same-organization Member exercising another user's private gateway credential when the gateway ID is already known;
+- a self-service tenant Owner reaching the deployment-wide write path for global feature flags;
 - server-side gateway requests reaching a link-local HTTP service outside the disposable sandbox;
 - OAuth preflight following an attacker-directed registration redirect into loopback before any MCP config or agent exists;
 - an MCP connection test reflecting a controlled upstream error marker; and

@@ -106,7 +106,7 @@ export function Deck() {
     <Frame key="cover" chapter="SPYDR / CODEX COMMUNITY HACKATHON" title={<>SPYDR is your<br />autonomous red team.</>} className="coverSlide">
       <pre className="coverSpider" aria-hidden="true">{ASCII_SPIDER}</pre>
       <p className="heroCopy">Give SPYDR a domain. SPYDR finds and proves security bugs in the live product.</p>
-      <div className="coverProof"><span>LIVE PROOF</span><strong>SPYDR found 5 active vulnerabilities in Runloop.</strong><em>1 CRITICAL · 4 HIGH</em></div>
+      <div className="coverProof"><span>LIVE PROOF</span><strong>SPYDR found 6 active vulnerabilities in Runloop.</strong><em>1 CRITICAL · 5 HIGH</em></div>
     </Frame>,
 
     <Frame key="thesis" chapter="WHY LIVE TESTING" title={<>Source code shows<br />possible bugs.</>} tone="light">
@@ -183,10 +183,11 @@ export function Deck() {
     <FindingSlide key="finding-3" finding={findings[2]} number={3} />,
     <FindingSlide key="finding-4" finding={findings[3]} number={4} />,
     <FindingSlide key="finding-5" finding={findings[4]} number={5} />,
+    <FindingSlide key="finding-6" finding={findings[5]} number={6} />,
 
     <Frame key="truth" chapter="RESULT / EVIDENCE" title={<>SPYDR reports only<br />proven results.</>}>
       <div className="truthColumns truthSingle">
-        <div><span className="yes">PROVEN IN LIVE TESTS</span><p>Server-side requests.<br />OAuth redirect to a local address.<br />Use of another user&apos;s credential.<br />A command outside the selected folder.<br />A server response returned to the user.</p></div>
+        <div><span className="yes">PROVEN IN LIVE TESTS</span><p>Server-side requests.<br />OAuth redirect to a local address.<br />Use of another user&apos;s credential.<br />Deployment-wide feature-flag write access.<br />A command outside the selected folder.<br />A server response returned to the user.</p></div>
       </div>
     </Frame>,
 

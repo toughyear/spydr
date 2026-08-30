@@ -30,9 +30,9 @@ test("renders the SPYDR tap-through deck", async () => {
   assert.match(html, /SPYDR \/ CODEX COMMUNITY HACKATHON/);
   assert.match(html, /SPYDR is your/);
   assert.match(html, /autonomous red team/);
-  assert.match(html, /found 5 active vulnerabilities in Runloop/);
+  assert.match(html, /found 6 active vulnerabilities in Runloop/);
   assert.match(html, /1 CRITICAL/);
-  assert.match(html, /4 HIGH/);
+  assert.match(html, /5 HIGH/);
   assert.match(html, /aria-label="Next slide"/);
   assert.match(html, /https:\/\/spydr\.test\/og\.png/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Starter Project/);
@@ -48,8 +48,9 @@ test("keeps recon and finding evidence in structured data", async () => {
   assert.equal(recon.names.length, 34);
   assert.ok(recon.names.includes("docs.runloop.ai"));
   assert.ok(recon.names.includes("reflex.runloop.ai"));
-  assert.equal(findings.length, 5);
-  assert.deepEqual(findings.map((finding) => finding.severity), ["CRITICAL", "HIGH", "HIGH", "HIGH", "HIGH"]);
+  assert.equal(findings.length, 6);
+  assert.deepEqual(findings.map((finding) => finding.severity), ["CRITICAL", "HIGH", "HIGH", "HIGH", "HIGH", "HIGH"]);
+  assert.equal(findings[1].short, "Global feature flags");
   assert.ok(findings.every((finding) => finding.impact.length > 40));
   assert.match(deck, /ArrowRight/);
   assert.match(deck, /URLSearchParams/);
