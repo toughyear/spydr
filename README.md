@@ -1,3 +1,5 @@
+<img width="3450" height="1686" alt="CleanShot 2026-08-29 at 17 33 07@2x" src="https://github.com/user-attachments/assets/8f7971b0-f917-4df1-9924-638104287a29" />
+
 # SPYDR
 
 **Your autonomous red team.**
